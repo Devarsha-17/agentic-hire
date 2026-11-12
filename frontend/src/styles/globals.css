@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base Reset ─────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #0a0a1a;
+  color: #e2e8f0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0f0f2a; }
+::-webkit-scrollbar-thumb { background: #2d2d6b; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #4f8ef7; }
+
+/* ── Glass Card ─────────────────────────────────── */
+@layer components {
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:shadow-card;
+  }
+
+  .glow-blue {
+    @apply shadow-glow-blue;
+  }
+
+  .glow-purple {
+    @apply shadow-glow-purple;
+  }
+
+  /* Input fields */
+  .input-field {
+    @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-slate-200
+           placeholder-slate-500 focus:outline-none focus:border-brand-500/60 focus:bg-white/10
+           transition-all duration-200 text-sm;
+  }
+
+  .textarea-field {
+    @apply input-field resize-none;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm
+           bg-gradient-to-r from-brand-600 to-purple-600
+           hover:from-brand-500 hover:to-purple-500
+           text-white transition-all duration-200
+           shadow-glow-blue hover:shadow-glow-purple
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm
+           bg-white/5 border border-white/10
+           hover:bg-white/10 hover:border-white/20
+           text-slate-200 transition-all duration-200
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm
+           bg-red-500/20 border border-red-500/30
+           hover:bg-red-500/30 hover:border-red-500/50
+           text-red-400 transition-all duration-200
+           active:scale-95;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+  .badge-blue   { @apply badge bg-brand-500/20 text-brand-400 border border-brand-500/30; }
+  .badge-green  { @apply badge bg-emerald-500/20 text-emerald-400 border border-emerald-500/30; }
+  .badge-yellow { @apply badge bg-yellow-500/20 text-yellow-400 border border-yellow-500/30; }
+  .badge-red    { @apply badge bg-red-500/20 text-red-400 border border-red-500/30; }
+  .badge-purple { @apply badge bg-purple-500/20 text-purple-400 border border-purple-500/30; }
+  .badge-gray   { @apply badge bg-white/10 text-slate-400 border border-white/10; }
+
+  /* Section heading */
+  .section-title {
+    @apply text-xl font-bold text-slate-100 mb-1;
+  }
+  .section-sub {
+    @apply text-sm text-slate-400 mb-6;
+  }
+
+  /* Label */
+  .form-label {
+    @apply block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-white/10 my-6;
+  }
+}
+
+/* ── Gradient text ──────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(90deg, #4f8ef7, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Shimmer Loading ────────────────────────────── */
+.shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ── Score Ring ─────────────────────────────────── */
+.score-ring-path {
+  animation: scoreRing 1.2s ease-out forwards;
+  stroke-dasharray: 283;
+}
+
+/* ── Drag zone ──────────────────────────────────── */
+.drop-zone {
+  @apply border-2 border-dashed border-white/20 rounded-2xl p-12 text-center
+         transition-all duration-300 cursor-pointer;
+}
+.drop-zone.active {
+  @apply border-brand-500/60 bg-brand-500/5 shadow-glow-blue;
+}
+.drop-zone:hover {
+  @apply border-white/30 bg-white/5;
+}
+
+/* ── Prose-like markdown output ─────────────────── */
+.ai-prose p  { @apply mb-3 text-slate-300 leading-relaxed; }
+.ai-prose ul { @apply list-disc list-inside mb-3 space-y-1 text-slate-300; }
+.ai-prose li { @apply text-sm; }
+.ai-prose strong { @apply text-white font-semibold; }
